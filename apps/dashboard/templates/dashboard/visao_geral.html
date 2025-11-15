@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1 class="h3 mb-4">{{ titulo_pagina }}</h1>
+<div class="row g-4">
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Alunos</h2>
+                <p class="display-6">{{ total_alunos }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Professores</h2>
+                <p class="display-6">{{ total_professores }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Cursos</h2>
+                <p class="display-6">{{ total_cursos }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Turmas ativas</h2>
+                <p class="display-6">{{ total_turmas_ativas }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Matrículas</h2>
+                <p class="display-6">{{ total_matriculas }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-xl-3">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h2 class="h5">Pagamentos em aberto</h2>
+                <p class="display-6">{{ total_pagamentos_pendentes }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

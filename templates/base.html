@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block titulo %}{{ titulo_pagina|default:'Alvo Gestão' }}{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-FoA1hm7d+6vOD87mpy4V/mQJu1WDV5jT17clVSa+kXKXVyqIs8P/OV2PyYGup8bE" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'dashboard:visao_geral' %}">Alvo Gestão</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarConteudo" aria-controls="navbarConteudo" aria-expanded="false" aria-label="Alternar navegação">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarConteudo">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'alunos:lista' %}">Alunos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'professores:lista' %}">Professores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cursos:lista' %}">Cursos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'turmas:lista' %}">Turmas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'matriculas:lista' %}">Matrículas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'financeiro:lista' %}">Financeiro</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'configuracoes:empresa' %}">Configurações</a></li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><span class="navbar-text me-3">Olá, {{ user.first_name|default:user.username }}</span></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Sair</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <main class="container py-4">
+            {% if breadcrumbs %}
+            <nav aria-label="breadcrumb" class="mb-3">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'dashboard:visao_geral' %}">Início</a></li>
+                    {% for rotulo, url in breadcrumbs %}
+                    {% if url %}
+                    <li class="breadcrumb-item"><a href="{{ url }}">{{ rotulo }}</a></li>
+                    {% else %}
+                    <li class="breadcrumb-item active" aria-current="page">{{ rotulo }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+            </nav>
+            {% endif %}
+            {% include "components/mensagens.html" %}
+            {% block conteudo %}{% endblock %}
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-B9x6pRP70dNDO7xjMnIKh4j/wcgUp3NEPoPFcAckU4iigIvuXvYDn8ApX2HFqDMN" crossorigin="anonymous"></script>
+        <script src="{% static 'js/personalizado.js' %}"></script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="text-center py-5">
+    <h1 class="display-4">Erro interno</h1>
+    <p class="lead">Ocorreu um erro inesperado. Nossa equipe já foi notificada.</p>
+    <a href="{% url 'dashboard:visao_geral' %}" class="btn btn-primary">Voltar para o início</a>
+</div>
+{% endblock %}

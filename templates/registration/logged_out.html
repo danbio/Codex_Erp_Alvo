@@ -1,4 +1,8 @@
-<!-- templates/registration/logged_out.html -->
-<h2>Logout</h2>
-<p>Você saiu da sua conta com sucesso.</p>
-<a href="{% url 'login' %}">Fazer login novamente</a>
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="text-center py-5">
+    <h1 class="h3 mb-3">Sessão encerrada</h1>
+    <p class="mb-4">Você saiu do sistema com sucesso.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Entrar novamente</a>
+</div>
+{% endblock %}

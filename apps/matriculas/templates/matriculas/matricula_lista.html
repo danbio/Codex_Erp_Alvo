@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">{{ titulo_pagina }}</h1>
+    <a href="{% url 'matriculas:criar' %}" class="btn btn-primary">Nova matrícula</a>
+</div>
+<table class="table table-striped table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th class="text-end">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for matricula in matriculas %}
+        <tr>
+            <td>{{ matricula.aluno.nome }}</td>
+            <td>{{ matricula.turma.nome }}</td>
+            <td>{{ matricula.data_matricula|date:'d/m/Y' }}</td>
+            <td>{{ matricula.get_status_display }}</td>
+            <td class="text-end">
+                <a href="{% url 'matriculas:editar' matricula.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'matriculas:excluir' matricula.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center">Nenhuma matrícula cadastrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
