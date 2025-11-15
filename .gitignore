@@ -1,0 +1,42 @@
+# Arquivos de Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Banco de dados
+db.sqlite3
+/db.sqlite3
+
+# Arquivos de ambiente
+.env
+.env.*
+!.env.example
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de build/distribuição
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Arquivos de log
+*.log
+
+# Arquivos de teste
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos estáticos coletados
+/static/
+/media/

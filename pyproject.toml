@@ -1,0 +1,27 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 119
+src = ["apps", "erp_alvo"]
+extend-exclude = ["apps/*/migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+fixable = ["E", "F", "I"]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = ["apps", "erp_alvo"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.djlint]
+profile = "django"
+indent = 4
+max_line_length = 119
+extend_exclude = ".venv,.git,__pycache__"
+use_gitignore = true
+blank_line_after_tag = "load,extends,block"

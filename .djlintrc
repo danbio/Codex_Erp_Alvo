@@ -1,0 +1,9 @@
+{
+    "profile": "django",
+    "exclude": [
+        "migrations/",
+        "static/",
+        "venv/",
+        "__pycache__/"
+    ]
+}

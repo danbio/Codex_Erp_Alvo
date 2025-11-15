@@ -1,0 +1,11 @@
+# Framework
+django~=5.2.8
+
+# Variáveis de ambiente
+python-dotenv
+
+# Configuração de banco de dados a partir de URL
+dj-database-url
+
+# Linter e formatador de templates
+djlint
