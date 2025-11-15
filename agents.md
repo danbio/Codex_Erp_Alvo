@@ -43,7 +43,7 @@ Codex_Erp_Alvo/
 │   └── asgi.py
 │
 ├── apps/                         # Todos os apps Django ficam aqui
-│   ├── core/                     # App central (models comuns, utils, etc.)
+│   ├── setup/                    # App central (models comuns, utils, etc.)
 │   ├── alunos/                   # Gestão de alunos
 │   ├── professores/              # Gestão de professores
 │   ├── turmas/                   # Gestão de turmas
@@ -52,6 +52,7 @@ Codex_Erp_Alvo/
 │   ├── financeiro/               # Módulo financeiro
 │   ├── propostas/                # Propostas comerciais
 │   ├── contratos/                # Gestão de contratos
+│   ├── configuracoes/            # Gestão de configurações do projeto
 │   └── accounts/                 # Autenticação e usuários
 │
 ├── static/                       # Arquivos estáticos globais
