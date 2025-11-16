@@ -38,5 +38,5 @@ dist/
 htmlcov/
 
 # Arquivos estáticos coletados
-/static/
+/staticfiles/
 /media/

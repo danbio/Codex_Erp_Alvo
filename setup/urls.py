@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from setup.views import home
+from setup.views import DashboardView, PaginaInicialView
 
 urlpatterns = [
     # Url de administração
@@ -9,5 +9,7 @@ urlpatterns = [
     # Autenticação de usuários
     path("accounts/", include("django.contrib.auth.urls")),
     # Página inicial
-    path("", home, name="home"),
+    path("", PaginaInicialView.as_view(), name="home"),
+    # Painel autenticado
+    path("dashboard/", DashboardView.as_view(), name="dashboard"),
 ]

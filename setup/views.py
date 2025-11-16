@@ -1,13 +1,17 @@
-# setup/views.py
+"""Views responsáveis pelas páginas institucionais do projeto."""
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
-
-def home(request):
-    return render(request, "home.html")
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
-@login_required
-def dashboard(request):
-    return render(request, "dashboard.html")
+class PaginaInicialView(TemplateView):
+    """Exibe o conteúdo público da aplicação, incentivando o login."""
+
+    template_name = "home.html"
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    """Painel interno protegido por autenticação."""
+
+    template_name = "dashboard.html"
+    login_url = "login"

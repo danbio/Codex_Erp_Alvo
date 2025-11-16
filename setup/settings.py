@@ -1,13 +1,58 @@
+"""Configurações principais do projeto Django."""
+
+from __future__ import annotations
+
+import os
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-yj(2-l2@^b)!(hluu_z%3wm&g43nnzu2dq6t&96%n@2_5&pcp="
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+def carregar_variaveis_ambiente(arquivo_env: Path) -> None:
+    """Popular ``os.environ`` com pares declarados em um arquivo ``.env``.
 
-ALLOWED_HOSTS = []
+    A função lê o arquivo linha a linha, ignorando comentários, e mantém as
+    variáveis já definidas no ambiente (prioridade para variáveis do sistema).
+    Esse comportamento permite utilizar o mesmo código em diferentes cenários,
+    evitando o hardcode de segredos sensíveis.
+    """
+
+    if not arquivo_env.exists():
+        return
+
+    for linha in arquivo_env.read_text(encoding="utf-8").splitlines():
+        if not linha or linha.startswith("#"):
+            continue
+        if "=" not in linha:
+            continue
+        chave, valor = linha.split("=", maxsplit=1)
+        os.environ.setdefault(chave.strip(), valor.strip())
+
+
+carregar_variaveis_ambiente(BASE_DIR / ".env")
+
+
+def obter_configuracao(chave: str, padrao: str | None = None, obrigatorio: bool = False) -> str:
+    """Recupera valores de configuração, garantindo presença quando necessário."""
+
+    valor = os.getenv(chave, padrao)
+    if obrigatorio and not valor:
+        raise ImproperlyConfigured(
+            f"Defina a variável de ambiente '{chave}' antes de iniciar o servidor."
+        )
+    return valor
+
+SECRET_KEY = obter_configuracao("DJANGO_SECRET_KEY", obrigatorio=True)
+
+DEBUG = obter_configuracao("DJANGO_DEBUG", "False").lower() == "true"
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in obter_configuracao("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    if host.strip()
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
