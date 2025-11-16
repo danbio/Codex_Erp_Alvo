@@ -1,0 +1,5 @@
+<!-- templates/dashboard.html -->
+{% if user.is_authenticated %}
+    <h2>Dashboard</h2>
+    <p>Olá, {{ user.get_full_name|default:user.username }}. Este é o painel protegido.</p>
+{% endif %}
