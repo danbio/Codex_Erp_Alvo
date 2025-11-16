@@ -16,6 +16,12 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY: str = os.getenv("SECRET_KEY", "chave-insegura-para-desenvolvimento")
 DEBUG: bool = os.getenv("DEBUG", "True").lower() in {"1", "true", "sim"}
 
+# Prevent running in production with insecure secret key
+if not DEBUG and SECRET_KEY == "chave-insegura-para-desenvolvimento":
+    raise RuntimeError(
+        "O SECRET_KEY não está definido! "
+        "Defina a variável de ambiente SECRET_KEY para um valor seguro em produção."
+    )
 ALLOWED_HOSTS_RAW: str = os.getenv("ALLOWED_HOSTS", "")
 ALLOWED_HOSTS: list[str] = [host.strip() for host in ALLOWED_HOSTS_RAW.split(",") if host.strip()]
 
