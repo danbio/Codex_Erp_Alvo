@@ -1,24 +1,26 @@
 {% extends "base.html" %}
+
+{% load form_filters %}
+
 {% block conteudo %}
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-        <h1 class="h3 mb-4">Entrar</h1>
-        <form method="post">
-            {% csrf_token %}
-            {% for campo in form %}
-            <div class="mb-3">
-                <label class="form-label" for="{{ campo.id_for_label }}">{{ campo.label }}</label>
-                {{ campo.as_widget(attrs={'class': 'form-control'}) }}
-                {% for erro in campo.errors %}
-                <div class="invalid-feedback d-block">{{ erro }}</div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <h1 class="h3 mb-4">Entrar</h1>
+            <form method="post">
+                {% csrf_token %}
+                {% for campo in form %}
+                    <div class="mb-3">
+                        <label class="form-label" for="{{ campo.id_for_label }}">{{ campo.label }}</label>
+                        {{ campo|add_css_class:"form-control" }}
+                        {% for erro in campo.errors %}<div class="invalid-feedback d-block">{{ erro }}</div>{% endfor %}
+                    </div>
                 {% endfor %}
-            </div>
-            {% endfor %}
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Acessar</button>
-        </form>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Acessar</button>
+            </form>
+        </div>
     </div>
-</div>
-{% endblock %}
+{% endblock conteudo %}
