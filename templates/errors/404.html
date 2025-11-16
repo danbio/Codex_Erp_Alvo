@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<div class="text-center py-5">
+    <h1 class="display-4">Página não encontrada</h1>
+    <p class="lead">A página solicitada não está disponível.</p>
+    <a href="{% url 'dashboard:visao_geral' %}" class="btn btn-primary">Voltar para o início</a>
+</div>
+{% endblock %}

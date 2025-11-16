@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% block conteudo %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">{{ titulo_pagina }}</h1>
+    <a href="{% url 'financeiro:criar' %}" class="btn btn-primary">Novo pagamento</a>
+</div>
+<table class="table table-striped table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Descrição</th>
+            <th>Matrícula</th>
+            <th>Vencimento</th>
+            <th>Valor</th>
+            <th>Status</th>
+            <th class="text-end">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pagamento in pagamentos %}
+        <tr>
+            <td>{{ pagamento.descricao }}</td>
+            <td>{{ pagamento.matricula.aluno.nome }}</td>
+            <td>{{ pagamento.data_vencimento|date:'d/m/Y' }}</td>
+            <td>R$ {{ pagamento.valor|floatformat:2 }}</td>
+            <td>{{ pagamento.get_status_display }}</td>
+            <td class="text-end">
+                <a href="{% url 'financeiro:editar' pagamento.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                <a href="{% url 'financeiro:excluir' pagamento.pk %}" class="btn btn-sm btn-outline-danger">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="text-center">Nenhum pagamento cadastrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

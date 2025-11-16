@@ -1,7 +1,7 @@
 [tool.ruff]
 target-version = "py313"
 line-length = 119
-src = ["apps", "erp_alvo"]
+src = ["apps", "alvo_gestao"]
 extend-exclude = ["apps/*/migrations"]
 
 [tool.ruff.lint]
@@ -10,7 +10,7 @@ fixable = ["E", "F", "I"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
-known-first-party = ["apps", "erp_alvo"]
+known-first-party = ["apps", "alvo_gestao"]
 
 [tool.ruff.format]
 quote-style = "double"
